@@ -70,6 +70,18 @@ section.block h2{font-weight:800;font-size:clamp(2rem,5vw,3.25rem);max-width:18c
 .rules li{padding-left:1.6rem;position:relative}
 .rules li::before{content:"";position:absolute;left:0;top:.6em;width:.8rem;height:.8rem;background:var(--gold);border:2px solid var(--ink);border-radius:50%}
 
+/* features */
+.features{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr))}
+.feature-box{background:#fff;border:2px solid var(--ink);border-radius:.6rem;padding:2.25rem 2rem;display:flex;flex-direction:column;gap:.75rem}
+.feature-box.dark{background:var(--ink);color:#DCE6F2}
+.feature-box h3{font-size:1.5rem;line-height:1.2}
+.feature-box.dark h3{color:#fff}
+.feature-box p{color:var(--mute);line-height:1.6;font-size:1.05rem}
+.feature-box.dark p{color:#9FB2C8}
+.badge{display:inline-flex;align-items:center;gap:.45rem;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.85rem;font-weight:700;padding:.35rem .75rem;border-radius:.35rem;width:fit-content;letter-spacing:.02em}
+.badge.blue{background:rgba(43,75,255,.1);color:var(--blue)}
+.badge.gold{background:rgba(255,210,63,.15);color:var(--gold)}
+
 /* win band */
 .win{background:var(--blue);color:#fff;padding:5rem 0;border:0}
 .win h2{max-width:16ch;margin-bottom:1.25rem}
@@ -175,6 +187,27 @@ footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--mute);fo
           <p>Your team enters hackathons with its own idea and its own plan to win.</p>
         </li>
       </ol>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <h2>Can’t find skilled teammates for your next hackathon?</h2>
+      <div class="features">
+        <div class="feature-box">
+          <div class="badge blue">Skilled Community</div>
+          <h3>A community ready to build with you</h3>
+          <p>You have a strong project idea, but finding reliable, skilled partners shouldn't hold you back. terminaLABS connects you with an active community of motivated developers and designers who are eager to team up, contribute to your vision, and build under pressure.</p>
+        </div>
+        <div class="feature-box dark">
+          <div class="badge gold">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>Private &amp; Secure</span>
+          </div>
+          <h3>Lock your project idea securely on GitHub</h3>
+          <p>Never worry about anyone stealing your concept. You can securely lock your project idea in a private GitHub repository that only you and your approved teammates can see. Your intellectual property stays 100% confidential and 100% yours.</p>
+        </div>
+      </div>
     </div>
   </section>
 
