@@ -75,7 +75,8 @@
     header .wrap {
       display: flex;
       justify-content: space-between;
-      align-items: center
+      align-items: center;
+      gap: 1rem
     }
 
     .logo {
@@ -83,13 +84,11 @@
       font-weight: 800;
       font-size: 1.25rem;
       text-decoration: none;
-      letter-spacing: -.01em
-    }
-
-    .logo {
+      letter-spacing: -.01em;
       display: inline-flex;
       align-items: center;
-      gap: .6rem
+      gap: .5rem;
+      flex-shrink: 0
     }
 
     .logo b {
@@ -99,7 +98,8 @@
     .mark {
       width: 2rem;
       height: 2rem;
-      display: block
+      display: block;
+      flex-shrink: 0
     }
 
     .btn {
@@ -110,7 +110,8 @@
       text-decoration: none;
       padding: .8rem 1.4rem;
       border-radius: .4rem;
-      transition: background .15s
+      transition: background .15s;
+      white-space: nowrap
     }
 
     .btn:hover {
@@ -127,21 +128,23 @@
     }
 
     .btn.sm {
-      padding: .55rem 1.1rem;
-      font-size: .95rem
+      padding: .48rem .95rem;
+      font-size: .9rem
     }
 
     nav {
       display: flex;
       align-items: center;
-      gap: 1.5rem
+      gap: 1.25rem;
+      flex-shrink: 0
     }
 
     nav a.nav-link {
       font-weight: 500;
       text-decoration: none;
       color: var(--mute);
-      transition: color .15s
+      transition: color .15s;
+      white-space: nowrap
     }
 
     nav a.nav-link:hover {
@@ -510,6 +513,113 @@
       color: var(--mute);
       font-size: .95rem
     }
+
+    /* mobile responsiveness */
+    @media (max-width: 48rem) {
+      .wrap {
+        padding: 0 1.25rem
+      }
+
+      header {
+        padding: 1rem 0
+      }
+
+      nav {
+        gap: 1rem
+      }
+    }
+
+    @media (max-width: 36rem) {
+      .wrap {
+        padding: 0 1rem
+      }
+
+      header .wrap {
+        gap: .5rem
+      }
+
+      .logo {
+        font-size: 1.1rem;
+        gap: .35rem
+      }
+
+      .mark {
+        width: 1.6rem;
+        height: 1.6rem
+      }
+
+      nav {
+        gap: .75rem
+      }
+
+      nav a.nav-link {
+        font-size: .9rem
+      }
+
+      .btn.sm {
+        padding: .4rem .75rem;
+        font-size: .82rem
+      }
+
+      .hero {
+        padding: 2.75rem 0 3.5rem
+      }
+
+      .hero h1 {
+        font-size: clamp(2.25rem, 8.5vw, 3.75rem)
+      }
+
+      .hero p {
+        font-size: 1.05rem;
+        margin: 1.25rem 0 1.5rem
+      }
+
+      .prompt {
+        margin-top: 2rem;
+        padding: 1rem 1.15rem;
+        font-size: .85rem
+      }
+
+      section.block {
+        padding: 3rem 0
+      }
+
+      .join {
+        padding: 3.5rem 0 3rem
+      }
+    }
+
+    @media (max-width: 24rem) {
+      .wrap {
+        padding: 0 .85rem
+      }
+
+      header .wrap {
+        gap: .35rem
+      }
+
+      .logo span {
+        font-size: 1rem
+      }
+
+      .mark {
+        width: 1.45rem;
+        height: 1.45rem
+      }
+
+      nav {
+        gap: .55rem
+      }
+
+      nav a.nav-link {
+        font-size: .85rem
+      }
+
+      .btn.sm {
+        padding: .35rem .6rem;
+        font-size: .78rem
+      }
+    }
   </style>
 </head>
 
@@ -517,12 +627,6 @@
 
   <header>
     <div class="wrap">
-      <a class="logo" href="#top"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
-          <rect width="40" height="40" rx="8" fill="#000" />
-          <path d="M11 9.5 21 17v2.2L11 26.7v-3.4l5.2-3.7L11 15.9z" fill="#fff" />
-          <rect x="23" y="25" width="8" height="2.6" fill="#fff" />
-        </svg><span>termina<b>LABS</b></span></a>
-      <a class="btn" href="#join">Join us</a>
       <a class="logo" href="index.html"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
           <rect width="40" height="40" rx="8" fill="#000" />
           <path d="M11 9.5 21 17v2.2L11 26.7v-3.4l5.2-3.7L11 15.9z" fill="#fff" />
