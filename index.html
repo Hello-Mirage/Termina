@@ -1,359 +1,756 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>terminaLABS – Train for hackathons. Go win them.</title>
-<meta name="description" content="terminaLABS trains you in the tech, helps you find teammates, and sends your team into hackathons to win. Free. Your ideas stay yours.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8'/%3E%3Cpath d='M11 9.5 21 17v2.2L11 26.7v-3.4l5.2-3.7L11 15.9z' fill='%23fff'/%3E%3Crect x='23' y='25' width='8' height='2.6' fill='%23fff'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --paper:#EAEFF3;
-  --ink:#0E1A2B;
-  --blue:#2B4BFF;
-  --gold:#FFD23F;
-  --mute:#4A5A70;
-  --line:#C5D0DB;
-  --head:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
-  --body:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
-.wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem}
-h1,h2,h3{font-family:var(--head);line-height:1.02;letter-spacing:-.02em}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>terminaLABS – Train for hackathons. Go win them.</title>
+  <meta name="description"
+    content="terminaLABS trains you in the tech, helps you find teammates, and sends your team into hackathons to win. Free. Your ideas stay yours.">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8'/%3E%3Cpath d='M11 9.5 21 17v2.2L11 26.7v-3.4l5.2-3.7L11 15.9z' fill='%23fff'/%3E%3Crect x='23' y='25' width='8' height='2.6' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --paper: #EAEFF3;
+      --ink: #0E1A2B;
+      --blue: #2B4BFF;
+      --gold: #FFD23F;
+      --mute: #4A5A70;
+      --line: #C5D0DB;
+      --head: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+      --body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
 
-/* header */
-header{padding:1.25rem 0}
-header .wrap{display:flex;justify-content:space-between;align-items:center}
-.logo{font-family:var(--head);font-weight:800;font-size:1.25rem;text-decoration:none;letter-spacing:-.01em}
-.logo{display:inline-flex;align-items:center;gap:.6rem}
-.logo b{color:var(--blue)}
-.mark{width:2rem;height:2rem;display:block}
-.btn{display:inline-block;background:var(--ink);color:var(--paper);font-weight:500;text-decoration:none;padding:.8rem 1.4rem;border-radius:.4rem;transition:background .15s}
-.btn:hover{background:var(--blue)}
-.btn.gold{background:var(--gold);color:var(--ink)}
-.btn.gold:hover{background:#fff}
-.btn.sm{padding:.55rem 1.1rem;font-size:.95rem}
-nav{display:flex;align-items:center;gap:1.5rem}
-nav a.nav-link{font-weight:500;text-decoration:none;color:var(--mute);transition:color .15s}
-nav a.nav-link:hover{color:var(--ink)}
-nav a.nav-link.active{color:var(--ink);font-weight:700}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-/* hero */
-.hero{padding:4rem 0 5rem}
-.hero h1{font-weight:800;font-size:clamp(3rem,9.5vw,7.5rem);max-width:12ch}
-.hero h1 span{display:block;color:var(--blue)}
-.hero p{max-width:34rem;margin:1.75rem 0 2rem;font-size:1.2rem;color:var(--mute)}
-.prompt{margin-top:3.5rem;background:var(--ink);color:#DCE6F2;border-radius:.6rem;padding:1.25rem 1.5rem;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.95rem;line-height:1.9;max-width:36rem;overflow-x:auto}
-.prompt .c{color:#7F93AD}
-.prompt .w{color:var(--gold)}
-.prompt .line{white-space:nowrap;overflow:hidden;width:0;animation:type .9s steps(34,end) forwards}
-.prompt .line:nth-child(2){animation-delay:1s}
-.prompt .line:nth-child(3){animation-delay:2s}
-.prompt .line:nth-child(4){animation-delay:3s}
-@keyframes type{to{width:100%}}
-@media (prefers-reduced-motion:reduce){.prompt .line{animation:none;width:auto}}
+    html {
+      scroll-behavior: smooth
+    }
 
-/* sections */
-section.block{padding:4.5rem 0;border-top:1px solid var(--line)}
-section.block h2{font-weight:800;font-size:clamp(2rem,5vw,3.25rem);max-width:18ch;margin-bottom:2.5rem}
-.steps{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));list-style:none;counter-reset:s}
-.steps li{counter-increment:s;border-top:4px solid var(--ink);padding-top:1rem}
-.steps li::before{content:counter(s);font-family:var(--head);font-weight:800;font-size:1.1rem;color:var(--blue)}
-.steps h3{font-size:1.6rem;margin:.4rem 0 .6rem}
-.steps p{color:var(--mute);max-width:30ch}
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 1.0625rem;
+      line-height: 1.6
+    }
 
-.split{display:grid;gap:2.5rem;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));align-items:start}
-.split p{color:var(--mute);max-width:34rem;margin-bottom:1rem}
-.rules{list-style:none;display:grid;gap:.9rem}
-.rules li{padding-left:1.6rem;position:relative}
-.rules li::before{content:"";position:absolute;left:0;top:.6em;width:.8rem;height:.8rem;background:var(--gold);border:2px solid var(--ink);border-radius:50%}
+    a {
+      color: inherit
+    }
 
-/* features */
-.features{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr))}
-.feature-box{background:#fff;border:2px solid var(--ink);border-radius:.6rem;padding:2.25rem 2rem;display:flex;flex-direction:column;gap:.75rem}
-.feature-box.dark{background:var(--ink);color:#DCE6F2}
-.feature-box h3{font-size:1.5rem;line-height:1.2}
-.feature-box.dark h3{color:#fff}
-.feature-box p{color:var(--mute);line-height:1.6;font-size:1.05rem}
-.feature-box.dark p{color:#9FB2C8}
-.badge{display:inline-flex;align-items:center;gap:.45rem;font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.85rem;font-weight:700;padding:.35rem .75rem;border-radius:.35rem;width:fit-content;letter-spacing:.02em}
-.badge.blue{background:rgba(43,75,255,.1);color:var(--blue)}
-.badge.gold{background:rgba(255,210,63,.15);color:var(--gold)}
+    :focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 3px
+    }
 
-/* win band */
-.win{background:var(--blue);color:#fff;padding:5rem 0;border:0}
-.win h2{max-width:16ch;margin-bottom:1.25rem}
-.win p{max-width:36rem;font-size:1.2rem;color:#E3E9FF}
+    .wrap {
+      max-width: 68rem;
+      margin: 0 auto;
+      padding: 0 1.5rem
+    }
 
-/* people */
-.people-grid{list-style:none;display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
-.member{display:flex;align-items:center;gap:1rem}
-.avatar-wrap{position:relative;flex-shrink:0;text-decoration:none;display:block}
-.avatar{
-  width:3.5rem;
-  height:3.5rem;
-  border-radius:50%;
-  border:2px solid var(--ink);
-  background:var(--ink);
-  color:var(--gold);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family:var(--head);
-  font-weight:800;
-  font-size:1rem;
-  letter-spacing:.02em;
-  overflow:hidden;
-  position:relative;
-  transition:border-color .15s ease, transform .15s ease;
-}
-.avatar img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-.avatar-wrap:hover .avatar,
-.member:hover .avatar{
-  border-color:var(--blue);
-  transform:translateY(-1px);
-}
-.avatar.more{
-  background:transparent;
-  border:2px dashed var(--line);
-  color:var(--mute);
-  font-size:1.25rem;
-  font-weight:600;
-}
-.member-info{display:flex;align-items:baseline;gap:.5rem;line-height:1.3;flex-wrap:wrap}
-.member-info .name{font-weight:500;color:var(--ink);text-decoration:none;transition:color .15s ease}
-.member-info a.name:hover{color:var(--blue);text-decoration:underline}
-.member-info .role{color:var(--mute);font-size:.85rem}
-.member.more-item{align-items:center}
-.member.more-item .role{font-size:.95rem}
+    h1,
+    h2,
+    h3 {
+      font-family: var(--head);
+      line-height: 1.02;
+      letter-spacing: -.02em
+    }
 
-/* join */
-.join{padding:5rem 0 4rem}
-.join h2{margin-bottom:1.25rem}
-.join p{color:var(--mute);max-width:32rem;margin-bottom:1.75rem}
-footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--mute);font-size:.95rem}
-</style>
+    /* header */
+    header {
+      padding: 1.25rem 0
+    }
+
+    header .wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .logo {
+      font-family: var(--head);
+      font-weight: 800;
+      font-size: 1.25rem;
+      text-decoration: none;
+      letter-spacing: -.01em
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem
+    }
+
+    .logo b {
+      color: var(--blue)
+    }
+
+    .mark {
+      width: 2rem;
+      height: 2rem;
+      display: block
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--paper);
+      font-weight: 500;
+      text-decoration: none;
+      padding: .8rem 1.4rem;
+      border-radius: .4rem;
+      transition: background .15s
+    }
+
+    .btn:hover {
+      background: var(--blue)
+    }
+
+    .btn.gold {
+      background: var(--gold);
+      color: var(--ink)
+    }
+
+    .btn.gold:hover {
+      background: #fff
+    }
+
+    .btn.sm {
+      padding: .55rem 1.1rem;
+      font-size: .95rem
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem
+    }
+
+    nav a.nav-link {
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--mute);
+      transition: color .15s
+    }
+
+    nav a.nav-link:hover {
+      color: var(--ink)
+    }
+
+    nav a.nav-link.active {
+      color: var(--ink);
+      font-weight: 700
+    }
+
+    /* hero */
+    .hero {
+      padding: 4rem 0 5rem
+    }
+
+    .hero h1 {
+      font-weight: 800;
+      font-size: clamp(3rem, 9.5vw, 7.5rem);
+      max-width: 12ch
+    }
+
+    .hero h1 span {
+      display: block;
+      color: var(--blue)
+    }
+
+    .hero p {
+      max-width: 34rem;
+      margin: 1.75rem 0 2rem;
+      font-size: 1.2rem;
+      color: var(--mute)
+    }
+
+    .prompt {
+      margin-top: 3.5rem;
+      background: var(--ink);
+      color: #DCE6F2;
+      border-radius: .6rem;
+      padding: 1.25rem 1.5rem;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: .95rem;
+      line-height: 1.9;
+      max-width: 36rem;
+      overflow-x: auto
+    }
+
+    .prompt .c {
+      color: #7F93AD
+    }
+
+    .prompt .w {
+      color: var(--gold)
+    }
+
+    .prompt .line {
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: type .9s steps(34, end) forwards
+    }
+
+    .prompt .line:nth-child(2) {
+      animation-delay: 1s
+    }
+
+    .prompt .line:nth-child(3) {
+      animation-delay: 2s
+    }
+
+    .prompt .line:nth-child(4) {
+      animation-delay: 3s
+    }
+
+    @keyframes type {
+      to {
+        width: 100%
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      .prompt .line {
+        animation: none;
+        width: auto
+      }
+    }
+
+    /* sections */
+    section.block {
+      padding: 4.5rem 0;
+      border-top: 1px solid var(--line)
+    }
+
+    section.block h2 {
+      font-weight: 800;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      max-width: 18ch;
+      margin-bottom: 2.5rem
+    }
+
+    .steps {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      list-style: none;
+      counter-reset: s
+    }
+
+    .steps li {
+      counter-increment: s;
+      border-top: 4px solid var(--ink);
+      padding-top: 1rem
+    }
+
+    .steps li::before {
+      content: counter(s);
+      font-family: var(--head);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--blue)
+    }
+
+    .steps h3 {
+      font-size: 1.6rem;
+      margin: .4rem 0 .6rem
+    }
+
+    .steps p {
+      color: var(--mute);
+      max-width: 30ch
+    }
+
+    .split {
+      display: grid;
+      gap: 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+      align-items: start
+    }
+
+    .split p {
+      color: var(--mute);
+      max-width: 34rem;
+      margin-bottom: 1rem
+    }
+
+    .rules {
+      list-style: none;
+      display: grid;
+      gap: .9rem
+    }
+
+    .rules li {
+      padding-left: 1.6rem;
+      position: relative
+    }
+
+    .rules li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .6em;
+      width: .8rem;
+      height: .8rem;
+      background: var(--gold);
+      border: 2px solid var(--ink);
+      border-radius: 50%
+    }
+
+    /* features */
+    .features {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr))
+    }
+
+    .feature-box {
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: .6rem;
+      padding: 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem
+    }
+
+    .feature-box.dark {
+      background: var(--ink);
+      color: #DCE6F2
+    }
+
+    .feature-box h3 {
+      font-size: 1.5rem;
+      line-height: 1.2
+    }
+
+    .feature-box.dark h3 {
+      color: #fff
+    }
+
+    .feature-box p {
+      color: var(--mute);
+      line-height: 1.6;
+      font-size: 1.05rem
+    }
+
+    .feature-box.dark p {
+      color: #9FB2C8
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      font-size: .85rem;
+      font-weight: 700;
+      padding: .35rem .75rem;
+      border-radius: .35rem;
+      width: fit-content;
+      letter-spacing: .02em
+    }
+
+    .badge.blue {
+      background: rgba(43, 75, 255, .1);
+      color: var(--blue)
+    }
+
+    .badge.gold {
+      background: rgba(255, 210, 63, .15);
+      color: var(--gold)
+    }
+
+    /* win band */
+    .win {
+      background: var(--blue);
+      color: #fff;
+      padding: 5rem 0;
+      border: 0
+    }
+
+    .win h2 {
+      max-width: 16ch;
+      margin-bottom: 1.25rem
+    }
+
+    .win p {
+      max-width: 36rem;
+      font-size: 1.2rem;
+      color: #E3E9FF
+    }
+
+    /* people */
+    .people-grid {
+      list-style: none;
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr))
+    }
+
+    .member {
+      display: flex;
+      align-items: center;
+      gap: 1rem
+    }
+
+    .avatar-wrap {
+      position: relative;
+      flex-shrink: 0;
+      text-decoration: none;
+      display: block
+    }
+
+    .avatar {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      border: 2px solid var(--ink);
+      background: var(--ink);
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--head);
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: .02em;
+      overflow: hidden;
+      position: relative;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+
+    .avatar img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .avatar-wrap:hover .avatar,
+    .member:hover .avatar {
+      border-color: var(--blue);
+      transform: translateY(-1px);
+    }
+
+    .avatar.more {
+      background: transparent;
+      border: 2px dashed var(--line);
+      color: var(--mute);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .member-info {
+      display: flex;
+      align-items: baseline;
+      gap: .5rem;
+      line-height: 1.3;
+      flex-wrap: wrap
+    }
+
+    .member-info .name {
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color .15s ease
+    }
+
+    .member-info a.name:hover {
+      color: var(--blue);
+      text-decoration: underline
+    }
+
+    .member-info .role {
+      color: var(--mute);
+      font-size: .85rem
+    }
+
+    .member.more-item {
+      align-items: center
+    }
+
+    .member.more-item .role {
+      font-size: .95rem
+    }
+
+    /* join */
+    .join {
+      padding: 5rem 0 4rem
+    }
+
+    .join h2 {
+      margin-bottom: 1.25rem
+    }
+
+    .join p {
+      color: var(--mute);
+      max-width: 32rem;
+      margin-bottom: 1.75rem
+    }
+
+    footer {
+      padding: 2rem 0 3rem;
+      border-top: 1px solid var(--line);
+      color: var(--mute);
+      font-size: .95rem
+    }
+  </style>
 </head>
+
 <body>
 
-<header>
-  <div class="wrap">
-    <a class="logo" href="index.html"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="8" fill="#000"/><path d="M11 9.5 21 17v2.2L11 26.7v-3.4l5.2-3.7L11 15.9z" fill="#fff"/><rect x="23" y="25" width="8" height="2.6" fill="#fff"/></svg><span>termina<b>LABS</b></span></a>
-    <nav>
-      <a href="index.html" class="nav-link active">Home</a>
-      <a href="gallery.html" class="nav-link">Gallery</a>
-      <a class="btn sm" href="#join">Join us</a>
-    </nav>
-  </div>
-</header>
-
-<main id="top">
-  <section class="hero">
+  <header>
     <div class="wrap">
-      <h1>Train for hackathons. <span>Go win them.</span></h1>
-      <p>terminaLABS teaches you the tech, helps you find teammates, and gets your team ready to compete. It costs nothing, and the idea is always yours.</p>
-      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSczGqU0_Ubr8eA2FXg9FSTnnynZf6ieh0U82Xf_xWkd49esuQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Join terminaLABS</a>
-
-      <div class="prompt" aria-hidden="true">
-        <div class="line"><span class="c">$</span> learn --stack your-team-needs</div>
-        <div class="line"><span class="c">$</span> team --find teammate</div>
-        <div class="line"><span class="c">$</span> hackathon --enter</div>
-        <div class="line"><span class="c">&gt;</span> <span class="w">goal: first place</span></div>
-      </div>
+      <a class="logo" href="#top"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="8" fill="#000" />
+          <path d="M11 9.5 21 17v2.2L11 26.7v-3.4l5.2-3.7L11 15.9z" fill="#fff" />
+          <rect x="23" y="25" width="8" height="2.6" fill="#fff" />
+        </svg><span>termina<b>LABS</b></span></a>
+      <a class="btn" href="#join">Join us</a>
+      <a class="logo" href="index.html"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+          <rect width="40" height="40" rx="8" fill="#000" />
+          <path d="M11 9.5 21 17v2.2L11 26.7v-3.4l5.2-3.7L11 15.9z" fill="#fff" />
+          <rect x="23" y="25" width="8" height="2.6" fill="#fff" />
+        </svg><span>termina<b>LABS</b></span></a>
+      <nav>
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a class="btn sm" href="#join">Join us</a>
+      </nav>
     </div>
-  </section>
+  </header>
 
-  <section class="block">
-    <div class="wrap">
-      <h2>How it works</h2>
-      <ol class="steps">
-        <li>
-          <h3>Train</h3>
-          <p>We teach you the tech you need to build fast and ship a working project under pressure.</p>
-        </li>
-        <li>
-          <h3>Team up</h3>
-          <p>Ask anyone in terminaLABS to be your teammate, then form your own group.</p>
-        </li>
-        <li>
-          <h3>Compete</h3>
-          <p>Your team enters hackathons with its own idea and its own plan to win.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <h1>Train for hackathons. <span>Go win them.</span></h1>
+        <p>terminaLABS teaches you the tech, helps you find teammates, and gets your team ready to compete. It costs
+          nothing, and the idea is always yours.</p>
+        <a class="btn"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSczGqU0_Ubr8eA2FXg9FSTnnynZf6ieh0U82Xf_xWkd49esuQ/viewform?usp=publish-editor"
+          target="_blank" rel="noopener">Join terminaLABS</a>
 
-  <section class="block">
-    <div class="wrap">
-      <h2>Can’t find skilled teammates for your next hackathon?</h2>
-      <div class="features">
-        <div class="feature-box">
-          <h3>A community ready to build with you</h3>
-          <p>You have a strong project idea, but finding reliable, skilled partners shouldn't hold you back. terminaLABS connects you with an active community of motivated developers and designers who are eager to team up, contribute to your vision, and build under pressure.</p>
-        </div>
-        <div class="feature-box dark">
-          <h3>Lock your project idea securely on GitHub</h3>
-          <p>Never worry about anyone stealing your concept. You can securely lock your project idea in a private GitHub repository that only you and your approved teammates can see. Your intellectual property stays 100% confidential and 100% yours.</p>
+        <div class="prompt" aria-hidden="true">
+          <div class="line"><span class="c">$</span> learn --stack your-team-needs</div>
+          <div class="line"><span class="c">$</span> team --find teammate</div>
+          <div class="line"><span class="c">$</span> hackathon --enter</div>
+          <div class="line"><span class="c">&gt;</span> <span class="w">goal: first place</span></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="block">
-    <div class="wrap split">
-      <div>
-        <h2>An incubator with no money involved</h2>
-        <p>There are no fees and no equity. We teach the tech. Every team owns its idea from start to finish.</p>
+    <section class="block">
+      <div class="wrap">
+        <h2>How it works</h2>
+        <ol class="steps">
+          <li>
+            <h3>Train</h3>
+            <p>We teach you the tech you need to build fast and ship a working project under pressure.</p>
+          </li>
+          <li>
+            <h3>Team up</h3>
+            <p>Ask anyone in terminaLABS to be your teammate, then form your own group.</p>
+          </li>
+          <li>
+            <h3>Compete</h3>
+            <p>Your team enters hackathons with its own idea and its own plan to win.</p>
+          </li>
+        </ol>
       </div>
-      <ul class="rules">
-        <li>Free to join and free to learn.</li>
-        <li>Your team brings the idea. We never take it.</li>
-        <li>Need a teammate for the next hackathon? Ask someone here.</li>
-        <li>We train small groups so everyone gets real attention.</li>
-      </ul>
-    </div>
-  </section>
+    </section>
 
-  <section class="block win">
-    <div class="wrap">
-      <h2>We don’t go to participate.</h2>
-      <p>Showing up is the easy part. We train, plan, and build to win, and we want teammates who feel the same.</p>
-    </div>
-  </section>
+    <section class="block">
+      <div class="wrap">
+        <h2>Can’t find skilled teammates for your next hackathon?</h2>
+        <div class="features">
+          <div class="feature-box">
+            <h3>A community ready to build with you</h3>
+            <p>You have a strong project idea, but finding reliable, skilled partners shouldn't hold you back.
+              terminaLABS connects you with an active community of motivated developers and designers who are eager to
+              team up, contribute to your vision, and build under pressure.</p>
+          </div>
+          <div class="feature-box dark">
+            <h3>Lock your project idea securely on GitHub</h3>
+            <p>Never worry about anyone stealing your concept. You can securely lock your project idea in a private
+              GitHub repository that only you and your approved teammates can see. Your intellectual property stays 100%
+              confidential and 100% yours.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <section class="block" id="team">
-    <div class="wrap">
-      <h2>The people of terminaLABS</h2>
-      <ul class="people-grid">
-        <li class="member">
-          <a href="https://www.linkedin.com/in/miraj-rahaman-6a4a03444/" target="_blank" rel="noopener" class="avatar-wrap" aria-label="Miraj Rahaman LinkedIn">
-            <div class="avatar">
-              <img src="6pics/miraj-rahaman.jpg" alt="Miraj Rahaman" onerror="this.style.display='none'">
-              <span class="initials" aria-hidden="true">MR</span>
-            </div>
-          </a>
-          <div class="member-info">
-            <a href="https://www.linkedin.com/in/miraj-rahaman-6a4a03444/" target="_blank" rel="noopener" class="name">Miraj Rahaman</a>
-            <span class="role">Founder</span>
-          </div>
-        </li>
-        <li class="member">
-          <a href="https://www.linkedin.com/in/numan-hameed-ansari-04489819b/" target="_blank" rel="noopener" class="avatar-wrap" aria-label="Numan Hameed Ansari LinkedIn">
-            <div class="avatar">
-              <img src="6pics/numan-hameed-ansari.jpg" alt="Numan Hameed Ansari" onerror="this.style.display='none'">
-              <span class="initials" aria-hidden="true">NA</span>
-            </div>
-          </a>
-          <div class="member-info">
-            <a href="https://www.linkedin.com/in/numan-hameed-ansari-04489819b/" target="_blank" rel="noopener" class="name">Numan Hameed Ansari</a>
-            <span class="role">Co-founder</span>
-          </div>
-        </li>
-        <li class="member">
-          <div class="avatar-wrap">
-            <div class="avatar">
-              <img src="6pics/abhinaba-mandal.jpg" alt="Abhinaba Mandal" onerror="this.style.display='none'">
-              <span class="initials" aria-hidden="true">AM</span>
-            </div>
-          </div>
-          <div class="member-info">
-            <span class="name">Abhinaba Mandal</span>
-          </div>
-        </li>
-        <li class="member">
-          <a href="https://www.linkedin.com/in/afifa-farzeen-5237a3427/" target="_blank" rel="noopener" class="avatar-wrap" aria-label="Afifa Farzeen LinkedIn">
-            <div class="avatar">
-              <img src="6pics/afifa-farzeen.jpg" alt="Afifa Farzeen" onerror="this.style.display='none'">
-              <span class="initials" aria-hidden="true">AF</span>
-            </div>
-          </a>
-          <div class="member-info">
-            <a href="https://www.linkedin.com/in/afifa-farzeen-5237a3427/" target="_blank" rel="noopener" class="name">Afifa Farzeen</a>
-          </div>
-        </li>
-        <li class="member">
-          <a href="https://www.linkedin.com/in/moulina-nandi-0ba757443/" target="_blank" rel="noopener" class="avatar-wrap" aria-label="Moulina Nandi LinkedIn">
-            <div class="avatar">
-              <img src="6pics/moulina-nandi.jpg" alt="Moulina Nandi" onerror="this.style.display='none'">
-              <span class="initials" aria-hidden="true">MN</span>
-            </div>
-          </a>
-          <div class="member-info">
-            <a href="https://www.linkedin.com/in/moulina-nandi-0ba757443/" target="_blank" rel="noopener" class="name">Moulina Nandi</a>
-          </div>
-        </li>
-        <li class="member">
-          <div class="avatar-wrap">
-            <div class="avatar">
-              <img src="6pics/parnomi-roy-choudhury.jpg" alt="Parnomi Roy Choudhury" onerror="this.style.display='none'">
-              <span class="initials" aria-hidden="true">PR</span>
-            </div>
-          </div>
-          <div class="member-info">
-            <span class="name">Parnomi Roy Choudhury</span>
-          </div>
-        </li>
-        <li class="member">
-          <div class="avatar-wrap">
-            <div class="avatar">
-              <img src="6pics/partha-sarathi-sarkar.jpg" alt="Parth Chatterjee" onerror="this.style.display='none'">
-              <span class="initials" aria-hidden="true">PC</span>
-            </div>
-          </div>
-          <div class="member-info">
-            <span class="name">Parth Chatterjee</span>
-          </div>
-        </li>
-        <li class="member">
-          <div class="avatar-wrap">
-            <div class="avatar">
-              <img src="6pics/shivam-mishra.jpg" alt="Shivam Mishra" onerror="this.style.display='none'">
-              <span class="initials" aria-hidden="true">SM</span>
-            </div>
-          </div>
-          <div class="member-info">
-            <span class="name">Shivam Mishra</span>
-          </div>
-        </li>
-        <li class="member more-item">
-          <div class="avatar-wrap">
-            <div class="avatar more">+</div>
-          </div>
-          <div class="member-info">
-            <span class="role">and many more builders training to win.</span>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </section>
+    <section class="block">
+      <div class="wrap split">
+        <div>
+          <h2>An incubator with no money involved</h2>
+          <p>There are no fees and no equity. We teach the tech. Every team owns its idea from start to finish.</p>
+        </div>
+        <ul class="rules">
+          <li>Free to join and free to learn.</li>
+          <li>Your team brings the idea. We never take it.</li>
+          <li>Need a teammate for the next hackathon? Ask someone here.</li>
+          <li>We train small groups so everyone gets real attention.</li>
+        </ul>
+      </div>
+    </section>
 
-  <section class="join" id="join">
-    <div class="wrap">
-      <h2>Ready to build a winning team?</h2>
-      <p>Tell us what you want to build and what you want to learn. We’ll help you get ready for your next hackathon.</p>
-      <!-- Google Form link -->
-      <a class="btn gold" href="https://docs.google.com/forms/d/e/1FAIpQLSczGqU0_Ubr8eA2FXg9FSTnnynZf6ieh0U82Xf_xWkd49esuQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Join terminaLABS</a>
-    </div>
-  </section>
-</main>
+    <section class="block win">
+      <div class="wrap">
+        <h2>We don’t go to participate.</h2>
+        <p>Showing up is the easy part. We train, plan, and build to win, and we want teammates who feel the same.</p>
+      </div>
+    </section>
 
-<footer>
-  <div class="wrap">terminaLABS. Train. Team up. Win. &nbsp;<a href="https://www.linkedin.com/company/terminalabsgroup" target="_blank" rel="noopener">Follow us on LinkedIn</a></div>
-</footer>
+    <section class="block" id="team">
+      <div class="wrap">
+        <h2>The people of terminaLABS</h2>
+        <ul class="people-grid">
+          <li class="member">
+            <a href="https://www.linkedin.com/in/miraj-rahaman-6a4a03444/" target="_blank" rel="noopener"
+              class="avatar-wrap" aria-label="Miraj Rahaman LinkedIn">
+              <div class="avatar">
+                <img src="6pics/miraj-rahaman.jpg" alt="Miraj Rahaman" onerror="this.style.display='none'">
+                <span class="initials" aria-hidden="true">MR</span>
+              </div>
+            </a>
+            <div class="member-info">
+              <a href="https://www.linkedin.com/in/miraj-rahaman-6a4a03444/" target="_blank" rel="noopener"
+                class="name">Miraj Rahaman</a>
+              <span class="role">Founder</span>
+            </div>
+          </li>
+          <li class="member">
+            <a href="https://www.linkedin.com/in/numan-hameed-ansari-04489819b/" target="_blank" rel="noopener"
+              class="avatar-wrap" aria-label="Numan Hameed Ansari LinkedIn">
+              <div class="avatar">
+                <img src="6pics/numan-hameed-ansari.jpg" alt="Numan Hameed Ansari" onerror="this.style.display='none'">
+                <span class="initials" aria-hidden="true">NA</span>
+              </div>
+            </a>
+            <div class="member-info">
+              <a href="https://www.linkedin.com/in/numan-hameed-ansari-04489819b/" target="_blank" rel="noopener"
+                class="name">Numan Hameed Ansari</a>
+              <span class="role">Co-founder</span>
+            </div>
+          </li>
+          <li class="member">
+            <div class="avatar-wrap">
+              <div class="avatar">
+                <img src="6pics/abhinaba-mandal.jpg" alt="Abhinaba Mandal" onerror="this.style.display='none'">
+                <span class="initials" aria-hidden="true">AM</span>
+              </div>
+            </div>
+            <div class="member-info">
+              <span class="name">Abhinaba Mandal</span>
+            </div>
+          </li>
+          <li class="member">
+            <a href="https://www.linkedin.com/in/afifa-farzeen-5237a3427/" target="_blank" rel="noopener"
+              class="avatar-wrap" aria-label="Afifa Farzeen LinkedIn">
+              <div class="avatar">
+                <img src="6pics/afifa-farzeen.jpg" alt="Afifa Farzeen" onerror="this.style.display='none'">
+                <span class="initials" aria-hidden="true">AF</span>
+              </div>
+            </a>
+            <div class="member-info">
+              <a href="https://www.linkedin.com/in/afifa-farzeen-5237a3427/" target="_blank" rel="noopener"
+                class="name">Afifa Farzeen</a>
+            </div>
+          </li>
+          <li class="member">
+            <a href="https://www.linkedin.com/in/moulina-nandi-0ba757443/" target="_blank" rel="noopener"
+              class="avatar-wrap" aria-label="Moulina Nandi LinkedIn">
+              <div class="avatar">
+                <img src="6pics/moulina-nandi.jpg" alt="Moulina Nandi" onerror="this.style.display='none'">
+                <span class="initials" aria-hidden="true">MN</span>
+              </div>
+            </a>
+            <div class="member-info">
+              <a href="https://www.linkedin.com/in/moulina-nandi-0ba757443/" target="_blank" rel="noopener"
+                class="name">Moulina Nandi</a>
+            </div>
+          </li>
+          <li class="member">
+            <div class="avatar-wrap">
+              <div class="avatar">
+                <img src="6pics/parnomi-roy-choudhury.jpg" alt="Parnomi Roy Choudhury"
+                  onerror="this.style.display='none'">
+                <span class="initials" aria-hidden="true">PR</span>
+              </div>
+            </div>
+            <div class="member-info">
+              <span class="name">Parnomi Roy Choudhury</span>
+            </div>
+          </li>
+          <li class="member">
+            <div class="avatar-wrap">
+              <div class="avatar">
+                <img src="6pics/partha-sarathi-sarkar.jpg" alt="Parth Chatterjee" onerror="this.style.display='none'">
+                <span class="initials" aria-hidden="true">PC</span>
+              </div>
+            </div>
+            <div class="member-info">
+              <span class="name">Parth Chatterjee</span>
+            </div>
+          </li>
+          <li class="member">
+            <div class="avatar-wrap">
+              <div class="avatar">
+                <img src="6pics/shivam-mishra.jpg" alt="Shivam Mishra" onerror="this.style.display='none'">
+                <span class="initials" aria-hidden="true">SM</span>
+              </div>
+            </div>
+            <div class="member-info">
+              <span class="name">Shivam Mishra</span>
+            </div>
+          </li>
+          <li class="member more-item">
+            <div class="avatar-wrap">
+              <div class="avatar more">+</div>
+            </div>
+            <div class="member-info">
+              <span class="role">and many more builders training to win.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="join" id="join">
+      <div class="wrap">
+        <h2>Ready to build a winning team?</h2>
+        <p>Tell us what you want to build and what you want to learn. We’ll help you get ready for your next hackathon.
+        </p>
+        <!-- Google Form link -->
+        <a class="btn gold"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSczGqU0_Ubr8eA2FXg9FSTnnynZf6ieh0U82Xf_xWkd49esuQ/viewform?usp=publish-editor"
+          target="_blank" rel="noopener">Join terminaLABS</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">terminaLABS. Train. Team up. Win. &nbsp;<a
+        href="https://www.linkedin.com/company/terminalabsgroup" target="_blank" rel="noopener">Follow us on
+        LinkedIn</a></div>
+  </footer>
 
 </body>
+
 </html>
