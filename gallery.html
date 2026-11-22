@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gallery – terminaLABS</title>
 <meta name="description" content="Photos from terminaLABS hackathons, meetups, and build sessions.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8'/%3E%3Cpath d='M11 9.5 21 17v2.2L11 26.7v-3.4l5.2-3.7L11 15.9z' fill='%23fff'/%3E%3Crect x='23' y='25' width='8' height='2.6' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="Logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@ header{padding:1.25rem 0}
 header .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem}
 .logo{font-family:var(--head);font-weight:800;font-size:1.25rem;text-decoration:none;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:.5rem;flex-shrink:0}
 .logo b{color:var(--blue)}
-.mark{width:2rem;height:2rem;display:block;flex-shrink:0}
+.mark{width:2rem;height:2rem;display:block;flex-shrink:0;border-radius:.4rem;object-fit:contain}
 nav{display:flex;align-items:center;gap:1.25rem;flex-shrink:0}
 nav a.nav-link{font-weight:500;text-decoration:none;color:var(--mute);transition:color .15s;white-space:nowrap}
 nav a.nav-link:hover{color:var(--ink)}
@@ -122,6 +122,8 @@ nav a.nav-link.active{color:var(--ink);font-weight:700}
   font-size:1.05rem;
   margin-top:.4rem;
 }
+
+.event-header.second{margin-top:4.5rem}
 
 /* empty state */
 .empty-state{
@@ -224,7 +226,10 @@ footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--mute);fo
 
 <header>
   <div class="wrap">
-    <a class="logo" href="index.html"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="8" fill="#000"/><path d="M11 9.5 21 17v2.2L11 26.7v-3.4l5.2-3.7L11 15.9z" fill="#fff"/><rect x="23" y="25" width="8" height="2.6" fill="#fff"/></svg><span>termina<b>LABS</b></span></a>
+    <a class="logo" href="index.html">
+      <img class="mark" src="Logo.png" alt="terminaLABS logo">
+      <span>termina<b>LABS</b></span>
+    </a>
     <nav>
       <a href="index.html" class="nav-link">Home</a>
       <a href="gallery.html" class="nav-link active">Gallery</a>
@@ -243,7 +248,47 @@ footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--mute);fo
 
   <section class="gallery-section">
     <div class="wrap">
+      <!-- NASA Space Apps Challenge 2026 -->
       <div class="event-header">
+        <span class="event-tag">Hackathon Event</span>
+        <h2>NASA Space Apps Challenge 2026</h2>
+        <p class="event-sub">Haldia • Global Hackathon • Building Base Station &amp; competing together</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="card" onclick="openLightbox(this)">
+          <img src="gallery/NasaSpaceApps/nasa-team-hall.jpg" alt="terminaLABS team at NASA Space Apps Challenge 2026" loading="lazy">
+          <div class="caption">terminaLABS team at NASA Space Apps Challenge 2026</div>
+        </div>
+
+        <div class="card" onclick="openLightbox(this)">
+          <img src="gallery/NasaSpaceApps/nasa-participant-badges.jpg" alt="Official NASA Space Apps Challenge participant ID badges" loading="lazy">
+          <div class="caption">Official NASA Space Apps Challenge participant ID badges</div>
+        </div>
+
+        <div class="card" onclick="openLightbox(this)">
+          <img src="gallery/NasaSpaceApps/nasa-base-station-demo.jpg" alt="Project demo: Base Station space simulation in Unity" loading="lazy">
+          <div class="caption">Project demo: Base Station space simulation in Unity</div>
+        </div>
+
+        <div class="card" onclick="openLightbox(this)">
+          <img src="gallery/NasaSpaceApps/nasa-team-auditorium.jpg" alt="Team members attending NASA Space Apps Challenge" loading="lazy">
+          <div class="caption">Team members at NASA Space Apps Challenge</div>
+        </div>
+
+        <div class="card" onclick="openLightbox(this)">
+          <img src="gallery/NasaSpaceApps/nasa-unity-code.jpg" alt="Developing and scripting Base Station in Unity and C#" loading="lazy">
+          <div class="caption">Developing and scripting Base Station in Unity &amp; C#</div>
+        </div>
+
+        <div class="card" onclick="openLightbox(this)">
+          <img src="gallery/NasaSpaceApps/nasa-finals-stage.jpg" alt="Auditorium stage during the challenge finals" loading="lazy">
+          <div class="caption">Auditorium finals &amp; challenge presentations</div>
+        </div>
+      </div>
+
+      <!-- Hacktoberfest HackDay 2026 -->
+      <div class="event-header second">
         <span class="event-tag">Hackathon Event</span>
         <h2>Hacktoberfest HackDay 2026</h2>
         <p class="event-sub">Haldia • MLH Partnered • Building, shipping, and competing together</p>
@@ -308,9 +353,10 @@ footer{padding:2rem 0 3rem;border-top:1px solid var(--line);color:var(--mute);fo
 
 <script>
 // Hide empty state if there are photos
-const grid = document.getElementById('galleryGrid');
 const empty = document.getElementById('emptyState');
-if (grid.children.length > 0) empty.style.display = 'none';
+if (document.querySelectorAll('.gallery-grid .card').length > 0 && empty) {
+  empty.style.display = 'none';
+}
 
 // Lightbox
 function openLightbox(card) {

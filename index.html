@@ -7,8 +7,7 @@
   <title>terminaLABS – Train for hackathons. Go win them.</title>
   <meta name="description"
     content="terminaLABS trains you in the tech, helps you find teammates, and sends your team into hackathons to win. Free. Your ideas stay yours.">
-  <link rel="icon"
-    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8'/%3E%3Cpath d='M11 9.5 21 17v2.2L11 26.7v-3.4l5.2-3.7L11 15.9z' fill='%23fff'/%3E%3Crect x='23' y='25' width='8' height='2.6' fill='%23fff'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" href="Logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -99,7 +98,9 @@
       width: 2rem;
       height: 2rem;
       display: block;
-      flex-shrink: 0
+      flex-shrink: 0;
+      border-radius: .4rem;
+      object-fit: contain;
     }
 
     .btn {
@@ -627,11 +628,10 @@
 
   <header>
     <div class="wrap">
-      <a class="logo" href="index.html"><svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
-          <rect width="40" height="40" rx="8" fill="#000" />
-          <path d="M11 9.5 21 17v2.2L11 26.7v-3.4l5.2-3.7L11 15.9z" fill="#fff" />
-          <rect x="23" y="25" width="8" height="2.6" fill="#fff" />
-        </svg><span>termina<b>LABS</b></span></a>
+      <a class="logo" href="index.html">
+        <img class="mark" src="Logo.png" alt="terminaLABS logo">
+        <span>termina<b>LABS</b></span>
+      </a>
       <nav>
         <a href="index.html" class="nav-link active">Home</a>
         <a href="gallery.html" class="nav-link">Gallery</a>
