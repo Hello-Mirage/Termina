@@ -493,23 +493,23 @@
       font-size: .95rem
     }
 
-    /* event highlights scroller */
-    .highlights{padding:3.5rem 0;overflow:hidden}
+    /* event highlights carousel */
+    .highlights{padding:3.5rem 0}
     .highlights h2{margin-bottom:.5rem}
     .highlights .sub{color:var(--mute);margin-bottom:2rem;font-size:1.05rem}
-    .hl-track{display:flex;gap:1.75rem;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:1rem;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
-    .hl-track::-webkit-scrollbar{height:6px}
-    .hl-track::-webkit-scrollbar-track{background:transparent}
-    .hl-track::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
-    .hl-group{flex:0 0 auto;scroll-snap-align:start}
-    .hl-group h3{font-family:var(--head);font-size:1.1rem;margin-bottom:.75rem;white-space:nowrap}
-    .hl-group h3 .hl-badge{display:inline-block;background:var(--gold);color:var(--ink);font-size:.7rem;font-weight:700;padding:.15rem .5rem;border-radius:.25rem;vertical-align:middle;margin-left:.5rem;font-family:var(--body);letter-spacing:.03em}
-    .hl-strip{display:flex;gap:.75rem}
-    .hl-strip img{width:16rem;height:11rem;object-fit:cover;border-radius:.5rem;border:2px solid var(--line);transition:transform .2s,border-color .2s;cursor:pointer}
-    .hl-strip img:hover{transform:scale(1.03);border-color:var(--blue)}
-    .hl-more{display:inline-flex;align-items:center;gap:.35rem;margin-top:.75rem;font-weight:500;font-size:.95rem;color:var(--blue);text-decoration:none}
-    .hl-more:hover{text-decoration:underline}
-    .hl-more svg{width:1rem;height:1rem;fill:currentColor}
+    .carousel{position:relative;max-width:48rem;margin:0 auto;border-radius:.65rem;overflow:hidden;border:2px solid var(--line);background:var(--ink)}
+    .carousel-slide{display:none;position:relative}
+    .carousel-slide.active{display:block}
+    .carousel-slide img{width:100%;height:26rem;object-fit:cover;display:block}
+    .carousel-label{position:absolute;bottom:0;left:0;right:0;padding:1.1rem 1.5rem;background:linear-gradient(transparent,rgba(14,26,43,.85));color:#fff;font-family:var(--head);font-size:1.05rem;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:.6rem}
+    .carousel-label .hl-badge{display:inline-block;background:var(--gold);color:var(--ink);font-size:.65rem;font-weight:700;padding:.15rem .5rem;border-radius:.25rem;font-family:var(--body);letter-spacing:.03em;white-space:nowrap}
+    .carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);width:2.75rem;height:2.75rem;border:none;border-radius:50%;background:rgba(14,26,43,.6);color:#fff;font-size:1.35rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:2}
+    .carousel-arrow:hover{background:var(--blue)}
+    .carousel-arrow.prev{left:.75rem}
+    .carousel-arrow.next{right:.75rem}
+    .carousel-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1rem}
+    .carousel-dots button{width:.55rem;height:.55rem;border-radius:50%;border:none;background:var(--line);cursor:pointer;padding:0;transition:background .15s,transform .15s}
+    .carousel-dots button.active{background:var(--blue);transform:scale(1.3)}
 
     /* join */
     .join {
@@ -608,8 +608,9 @@
         padding: 3.5rem 0 3rem
       }
 
-      .hl-strip img{width:13rem;height:9rem}
-      .hl-group h3{font-size:1rem}
+      .carousel-slide img{height:18rem}
+      .carousel-arrow{width:2.25rem;height:2.25rem;font-size:1.1rem}
+      .carousel-label{font-size:.9rem;padding:.85rem 1rem}
     }
 
     @media (max-width: 24rem) {
@@ -748,39 +749,49 @@
       <div class="wrap">
         <h2>From our hackathons</h2>
         <p class="sub">Highlights from every event we've competed in. <a href="gallery.html" style="color:var(--blue)">See all photos →</a></p>
-        <div class="hl-track">
 
-          <!-- VCH3 -->
-          <div class="hl-group">
-            <h3>Vibe Coders Hackathon 3<span class="hl-badge">Top 10 Finalist</span></h3>
-            <div class="hl-strip">
-              <img src="gallery/VCH3/vch3-rank-1-leaderboard.jpg" alt="Top 10 Finalists leaderboard at VCH3" loading="lazy">
-              <img src="gallery/VCH3/vch3-team-building.jpg" alt="Team building at VCH3" loading="lazy">
-              <img src="gallery/VCH3/vch3-finals-pitch.jpg" alt="Finals pitch at VCH3" loading="lazy">
-            </div>
+        <div class="carousel" id="hlCarousel">
+          <div class="carousel-slide active" data-event="Vibe Coders Hackathon 3">
+            <img src="gallery/VCH3/vch3-rank-1-leaderboard.jpg" alt="Top 10 Finalists leaderboard at VCH3">
+            <div class="carousel-label">Vibe Coders Hackathon 3 <span class="hl-badge">Top 10 Finalist</span></div>
+          </div>
+          <div class="carousel-slide" data-event="Vibe Coders Hackathon 3">
+            <img src="gallery/VCH3/vch3-team-building.jpg" alt="Team building at VCH3">
+            <div class="carousel-label">Vibe Coders Hackathon 3 <span class="hl-badge">Top 10 Finalist</span></div>
+          </div>
+          <div class="carousel-slide" data-event="Vibe Coders Hackathon 3">
+            <img src="gallery/VCH3/vch3-finals-pitch.jpg" alt="Finals pitch at VCH3">
+            <div class="carousel-label">Vibe Coders Hackathon 3 <span class="hl-badge">Top 10 Finalist</span></div>
+          </div>
+          <div class="carousel-slide" data-event="NASA Space Apps Challenge 2026">
+            <img src="gallery/NasaSpaceApps/nasa-team-hall.jpg" alt="Team at NASA Space Apps Challenge">
+            <div class="carousel-label">NASA Space Apps Challenge 2026</div>
+          </div>
+          <div class="carousel-slide" data-event="NASA Space Apps Challenge 2026">
+            <img src="gallery/NasaSpaceApps/nasa-base-station-demo.jpg" alt="Base Station demo in Unity">
+            <div class="carousel-label">NASA Space Apps Challenge 2026</div>
+          </div>
+          <div class="carousel-slide" data-event="NASA Space Apps Challenge 2026">
+            <img src="gallery/NasaSpaceApps/nasa-finals-stage.jpg" alt="Finals stage at NASA Space Apps">
+            <div class="carousel-label">NASA Space Apps Challenge 2026</div>
+          </div>
+          <div class="carousel-slide" data-event="Hacktoberfest HackDay 2026">
+            <img src="gallery/1793442064993.jpg" alt="Builder community group photo">
+            <div class="carousel-label">Hacktoberfest HackDay 2026</div>
+          </div>
+          <div class="carousel-slide" data-event="Hacktoberfest HackDay 2026">
+            <img src="gallery/1793532453406.jpg" alt="Team FALCON building">
+            <div class="carousel-label">Hacktoberfest HackDay 2026</div>
+          </div>
+          <div class="carousel-slide" data-event="Hacktoberfest HackDay 2026">
+            <img src="gallery/1793532457347.jpg" alt="QUIZZY project demo">
+            <div class="carousel-label">Hacktoberfest HackDay 2026</div>
           </div>
 
-          <!-- NASA Space Apps -->
-          <div class="hl-group">
-            <h3>NASA Space Apps Challenge 2026</h3>
-            <div class="hl-strip">
-              <img src="gallery/NasaSpaceApps/nasa-team-hall.jpg" alt="Team at NASA Space Apps Challenge" loading="lazy">
-              <img src="gallery/NasaSpaceApps/nasa-base-station-demo.jpg" alt="Base Station demo in Unity" loading="lazy">
-              <img src="gallery/NasaSpaceApps/nasa-finals-stage.jpg" alt="Finals stage at NASA Space Apps" loading="lazy">
-            </div>
-          </div>
-
-          <!-- Hacktoberfest HackDay -->
-          <div class="hl-group">
-            <h3>Hacktoberfest HackDay 2026</h3>
-            <div class="hl-strip">
-              <img src="gallery/1793442064993.jpg" alt="Builder community group photo" loading="lazy">
-              <img src="gallery/1793532453406.jpg" alt="Team FALCON building" loading="lazy">
-              <img src="gallery/1793532457347.jpg" alt="QUIZZY project demo" loading="lazy">
-            </div>
-          </div>
-
+          <button class="carousel-arrow prev" aria-label="Previous" onclick="carouselNav(-1)">&#8249;</button>
+          <button class="carousel-arrow next" aria-label="Next" onclick="carouselNav(1)">&#8250;</button>
         </div>
+        <div class="carousel-dots" id="hlDots"></div>
       </div>
     </section>
 
@@ -917,6 +928,50 @@
         href="https://www.linkedin.com/company/terminalabsgroup" target="_blank" rel="noopener">Follow us on
         LinkedIn</a></div>
   </footer>
+
+<script>
+(function(){
+  var slides=document.querySelectorAll('#hlCarousel .carousel-slide');
+  var dotsWrap=document.getElementById('hlDots');
+  var cur=0;
+  // build dots
+  for(var i=0;i<slides.length;i++){
+    var b=document.createElement('button');
+    b.setAttribute('aria-label','Slide '+(i+1));
+    if(i===0)b.className='active';
+    b.dataset.i=i;
+    b.onclick=function(){goTo(+this.dataset.i)};
+    dotsWrap.appendChild(b);
+  }
+  var dots=dotsWrap.querySelectorAll('button');
+  function goTo(n){
+    slides[cur].classList.remove('active');
+    dots[cur].classList.remove('active');
+    cur=(n+slides.length)%slides.length;
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('active');
+  }
+  window.carouselNav=function(d){goTo(cur+d)};
+  // auto-advance every 4s, pause on hover
+  var timer=setInterval(function(){goTo(cur+1)},4000);
+  var el=document.getElementById('hlCarousel');
+  el.addEventListener('mouseenter',function(){clearInterval(timer)});
+  el.addEventListener('mouseleave',function(){timer=setInterval(function(){goTo(cur+1)},4000)});
+  // keyboard
+  el.setAttribute('tabindex','0');
+  el.addEventListener('keydown',function(e){
+    if(e.key==='ArrowLeft'){goTo(cur-1);e.preventDefault()}
+    if(e.key==='ArrowRight'){goTo(cur+1);e.preventDefault()}
+  });
+  // swipe
+  var sx;
+  el.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+  el.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-sx;
+    if(Math.abs(dx)>40){goTo(cur+(dx<0?1:-1))}
+  });
+})();
+</script>
 
 </body>
 
